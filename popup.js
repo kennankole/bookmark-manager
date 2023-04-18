@@ -1,12 +1,13 @@
+// eslint-disable-next-line no-undef
 chrome.bookmarks.getTree((bookmarkTreeNodes) => {
-  let bookmarks = bookmarkTreeNodes[0].children[0].children;
-  let bookmarkList = document.getElementById("bookmarks");
+  const bookmarks = bookmarkTreeNodes[0].children[0].children;
+  const bookmarkList = document.getElementById('bookmarks');
 
-  for (let i = 0; i < bookmarks.length; i++){
-    let bookmark = bookmarks[i];
+  for (let i = 0; i < bookmarks.length; i += 1) {
+    const bookmark = bookmarks[i];
 
-    let bookmarkItem = document.createElement("li");
+    const bookmarkItem = document.createElement('li');
     bookmarkItem.innerHTML += `<a href="${bookmark.url}"> ${bookmark.title}</a>`;
     bookmarkList.appendChild(bookmarkItem);
-  };
+  }
 });

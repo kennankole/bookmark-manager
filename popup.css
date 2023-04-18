@@ -2,10 +2,13 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   width: 20rem;
 }
-ul, a {
+
+ul,
+a {
   list-style-type: none;
   padding-inline-start: 0;
   margin: 1rem 0;
@@ -15,7 +18,6 @@ ul, a {
 li {
   padding: 0.25rem;
 }
-
 
 #bookmarks {
   display: flex;
