@@ -3,7 +3,7 @@
   "name": "Study pilot",
   "description": "A Bookmark Manager that allows you to organize and structure your bookmarks",
   "version": "1.0",
-  "permission": ["bookmarks"],
+  "permissions": ["bookmarks"],
   "action": {
     "default_icon": {
       "16": "images/icon-16.png",
