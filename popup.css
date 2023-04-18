@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 20rem;
+}
+ul, a {
+  list-style-type: none;
+  padding-inline-start: 0;
+  margin: 1rem 0;
+  text-decoration: none;
+}
+
+li {
+  padding: 0.25rem;
+}
+
+
+#bookmarks {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-title {
+  text-align: center;
+  color: grey;
+}
