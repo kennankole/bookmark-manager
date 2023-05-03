@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import _ from 'lodash';
 import './style.css';
 
@@ -10,3 +11,11 @@ const component = () => {
 };
 
 document.body.appendChild(component());
+
+const createFolderForm = document.getElementById('save-folder');
+
+createFolderForm.addEventListener('click', () => {
+  const inputElement = document.getElementById('folder_name');
+  console.log(inputElement.value);
+  inputElement.value = '';
+});

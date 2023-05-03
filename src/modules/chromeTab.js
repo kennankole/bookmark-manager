@@ -4,6 +4,7 @@ const savedUrls = JSON.parse(localStorage.getItem('bookmarks')) || [];
 const bookMarkUrls = document.getElementById('bookmark-elements');
 const saveBtn = document.getElementById('save-btn');
 const inputElement = document.getElementById('current-bookmark');
+const saveUrl = document.getElementById('save-url');
 
 const display = () => {
   bookMarkUrls.innerHTML = '';
@@ -31,3 +32,17 @@ saveBtn.addEventListener('click', (event) => {
 if (savedUrls) {
   display();
 }
+
+// const btn = document.getElementById('save-url');
+
+// btn.addEventListener('click', () => {
+//   chrome.bookmarks.create(
+//     {
+//       parentId: '2',
+//       title: 'Extension bookmarks',
+//     },
+//     (newFolder) => {
+//       console.log(`added folder: ${newFolder.title}`);
+//     },
+//   );
+// });
