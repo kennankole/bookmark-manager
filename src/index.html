@@ -6,11 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="./modules/chromeTab.js" defer></script>
+  <script src="./modules/bookmarking.js" defer></script>
   <title>My Bookmark Manager chrome extension</title>
 </head>
 <body>
   <h1>Hello, and welcome to study pilot</h1>
   <div>
+      <label for="folder_name">Folder name</label>
+      <input type="text" value="" id="folder_name" placeholder="Enter name of the folder">
+      <button id="save-folder" type="submit">Add folder</button>
     <button type="submit" id="save-btn">Bookmark this page</button>
     <div id="book-marks">
       <ul id="bookmark-elements"></ul>
