@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 /* eslint-disable no-unused-vars */
 const savedUrls = JSON.parse(localStorage.getItem('bookmarks')) || [];
 const bookMarkUrls = document.getElementById('bookmark-elements');
@@ -31,3 +32,22 @@ saveBtn.addEventListener('click', (event) => {
 if (savedUrls) {
   display();
 }
+
+chrome.bookmarks.getTree((bookmarkTreeNodes) => {
+  const bookmarkFolders = [];
+
+  const findFolders = (node) => {
+    if (node.children) {
+      node.children.forEach((childNode) => {
+        if (childNode.children) {
+          bookmarkFolders.push(childNode);
+          findFolders(childNode);
+        }
+      });
+    }
+  };
+  bookmarkTreeNodes.forEach((node) => {
+    findFolders(node);
+  });
+  console.log(bookmarkFolders);
+});
