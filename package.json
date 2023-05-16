@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/kennankole/bookmark-manager#readme",
   "dependencies": {
+    "fuse.js": "^6.6.2",
     "lodash": "^4.17.21"
   }
 }
