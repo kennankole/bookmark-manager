@@ -4,10 +4,6 @@
   "description": "A Bookmark Manager that allows you to organize and structure your bookmarks",
   "version": "1.0",
   "permissions": ["bookmarks", "tabs", "history", "storage"],
-  "background": {
-    "service_worker": "src/modules/chromeTab.js",
-    "type": "module"
-  },
 
   "action": {
     "default_icon": {
