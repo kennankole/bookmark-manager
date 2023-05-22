@@ -1,33 +1,69 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-const savedUrls = JSON.parse(localStorage.getItem('bookmarks')) || [];
-const bookMarkUrls = document.getElementById('bookmark-elements');
-const saveBtn = document.getElementById('save-btn');
-const inputElement = document.getElementById('current-bookmark');
+/* eslint-disable no-plusplus */
+/* eslint-disable no-undef */
+let allBookmarksData = [];
 
-const display = () => {
-  bookMarkUrls.innerHTML = '';
-  savedUrls.forEach((item) => {
-    bookMarkUrls.innerHTML += `
-      <li>
-        <a href="${item}" target="_blank">${item}</a>
-      </li>
-    `;
+const getAllBookmarks = (bookmakrs) => {
+  const allBookmarks = [];
+  bookmakrs.forEach((bookmark) => {
+    if (bookmark.url) {
+      allBookmarks.push({
+        title: bookmark.title,
+        url: bookmark.url,
+      });
+    } else if (bookmark.children) {
+      const childBookmarks = getAllBookmarks(bookmark.children);
+      allBookmarks.push(...childBookmarks);
+    }
+  });
+  return allBookmarks;
+};
+
+const closeList = () => {
+  const suggestions = document.getElementById('suggestions');
+  if (suggestions) {
+    suggestions.parentNode.removeChild(suggestions);
+  }
+};
+
+const autocompleteSearch = (query, list) => {
+  closeList();
+
+  query.addEventListener('input', () => {
+    closeList();
+    if (!query.value) return;
+    const suggestions = document.createElement('div');
+    suggestions.setAttribute('id', 'suggestions');
+    query.parentNode.appendChild(suggestions);
+
+    list.forEach((item) => {
+      if (item.url.toUpperCase().includes(query.value.toUpperCase())) {
+        const suggestion = document.createElement('ul');
+        const listItem = document.createElement('li');
+        listItem.innerHTML = item.url;
+        suggestion.appendChild(listItem);
+
+        listItem.addEventListener('click', () => {
+          query.value = listItem.innerHTML;
+          closeList();
+        });
+        listItem.style.cursor = 'pointer';
+        suggestions.appendChild(suggestion);
+      }
+    });
   });
 };
 
-saveBtn.addEventListener('click', (event) => {
-  chrome.tabs.query({
-    active: true,
-    currentWindow: true,
-  }, (tabs) => {
-    const currentTab = tabs[0].url;
-    savedUrls.push(currentTab);
-    localStorage.setItem('bookmarks', JSON.stringify(savedUrls));
-    display();
-  });
+chrome.bookmarks.getTree((bookmarks) => {
+  allBookmarksData = getAllBookmarks(bookmarks);
+  autocompleteSearch(document.getElementById('input'), allBookmarksData);
 });
 
-if (savedUrls) {
-  display();
-}
+const submitBtn = document.getElementById('my-form');
+submitBtn.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const url = document.getElementById('input').value;
+  if (url !== '') {
+    chrome.tabs.create({ url });
+  }
+});

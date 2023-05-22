@@ -1,1 +1,23 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>My Bookmark Manager chrome extension</title><script defer="defer" src="main.js"></script></head><body><h1>Hello, and welcome to study pilot</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="/src/modules/chromeTab.js" defer></script>
+  <title>My Bookmark Manager chrome extension</title>
+<script defer src="main.js"></script></head>
+<body>
+  <h1>Hello, and welcome to study pilot</h1>
+  <div>
+    <button type="submit" id="save-btn">Bookmark this page</button>
+    <input type="text" id="searchInput" placeholder="Search here..." />
+    <button id="searchButton" type="submit">Search</button>
+    <ul id="resultsList"></ul>
+    <div id="book-marks">
+      <ul id="bookmark-elements"></ul>
+    </div>
+  </div>
+</body>
+</html>

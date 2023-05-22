@@ -3,7 +3,8 @@
   "name": "Study pilot",
   "description": "A Bookmark Manager that allows you to organize and structure your bookmarks",
   "version": "1.0",
-  "permissions": ["bookmarks", "tabs"],
+  "permissions": ["bookmarks", "tabs", "history", "storage"],
+
   "action": {
     "default_icon": {
       "16": "images/icon-16.png",
@@ -13,5 +14,9 @@
     },
     "default_popup": "/src/index.html",
     "default_title": "Let's study"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'"
   }
+  
 }
