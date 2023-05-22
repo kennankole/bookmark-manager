@@ -6,18 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="/node_modules/fuse.js/dist/fuse.js" defer type="module"></script>
-  <!-- <script type="module" src="/src/index.js" defer></script> -->
   <script type="module" src="/src/modules/chromeTab.js" defer ></script>
   <title>My Bookmark Manager chrome extension</title>
 </head>
 <body>
   <h1>Hello, and welcome to study pilot</h1>
   <div>
-    <form autocomplete="off">
+    <form autocomplete="off" id="my-form">
       <label for="input">My favorite fruit:</label>
       <div>            
           <input type="text" id="input">
       </div>
+      <button type="submit">Visit site</button>
   </form>
   </div>
 </body>

@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
-
 let allBookmarksData = [];
 
 const getAllBookmarks = (bookmakrs) => {
@@ -11,35 +12,58 @@ const getAllBookmarks = (bookmakrs) => {
         url: bookmark.url,
       });
     } else if (bookmark.children) {
-      const childBookmars = getAllBookmarks(bookmark.children);
-      allBookmarks.push(...childBookmars);
+      const childBookmarks = getAllBookmarks(bookmark.children);
+      allBookmarks.push(...childBookmarks);
     }
   });
   return allBookmarks;
 };
 
-const updateAutocompleteDropdown = (matchingBookmarks) => {
-  matchingBookmarks.forEach((child) => {
-    console.log(child.url, child.title);
-  });
+const closeList = () => {
+  const suggestions = document.getElementById('suggestions');
+  if (suggestions) {
+    suggestions.parentNode.removeChild(suggestions);
+  }
 };
 
-const autocompleteSearch = (query) => {
-  const matchingBookmarks = allBookmarksData.filter((bookmark) => {
-    const title = bookmark.title.toLowerCase();
-    const queryLowerCase = query.toLowerCase();
-    return title.includes(queryLowerCase);
+const autocompleteSearch = (query, list) => {
+  closeList();
+
+  query.addEventListener('input', () => {
+    closeList();
+    if (!query.value) return;
+    const suggestions = document.createElement('div');
+    suggestions.setAttribute('id', 'suggestions');
+    query.parentNode.appendChild(suggestions);
+
+    list.forEach((item) => {
+      if (item.url.toUpperCase().includes(query.value.toUpperCase())) {
+        const suggestion = document.createElement('ul');
+        const listItem = document.createElement('li');
+        listItem.innerHTML = item.url;
+        suggestion.appendChild(listItem);
+
+        listItem.addEventListener('click', () => {
+          query.value = listItem.innerHTML;
+          closeList();
+        });
+        listItem.style.cursor = 'pointer';
+        suggestions.appendChild(suggestion);
+      }
+    });
   });
-
-  updateAutocompleteDropdown(matchingBookmarks);
 };
-
-const searchInput = document.getElementById('input');
-searchInput.addEventListener('input', (event) => {
-  const query = event.target.value;
-  autocompleteSearch(query);
-});
 
 chrome.bookmarks.getTree((bookmarks) => {
   allBookmarksData = getAllBookmarks(bookmarks);
+  autocompleteSearch(document.getElementById('input'), allBookmarksData);
+});
+
+const submitBtn = document.getElementById('my-form');
+submitBtn.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const url = document.getElementById('input').value;
+  if (url !== '') {
+    chrome.tabs.create({ url });
+  }
 });
