@@ -1,20 +1,71 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+
+* {
   margin: 0;
-  padding: 10px;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  font-family: 'Source Serif Pro', serif;
+}
+
+body {
+  display: flex;
   min-width: 400px;
+  min-height: 400px;
+  min-height: unset;
+  padding: 2rem;
+  border: 1px solid var(--color-stroke);
+  background: var(--color-off-white);
+  margin: 1rem auto;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+}
+
+form {
+  display: flex;
+  gap: 3px;
 }
 
 ul {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
-li {
+ul > li {
   list-style-type: none;
-  margin: 3%;
+  font-size: 1rem;
+  padding: 0.5rem;
 }
 
-a {
-  text-decoration: none;
+li:hover {
+  color: #4caf50;
+}
+
+input[type=text] {
+  padding: 8px 15px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 9px 16px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#go {
+  display: none;
+}
+
+button:hover {
+  background-color: #45a049;
 }
