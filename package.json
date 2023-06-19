@@ -21,7 +21,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "type": "module",
+    "type": "monpm i -S puppeteedule",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
     "build": "webpack"
@@ -39,6 +39,7 @@
   "homepage": "https://github.com/kennankole/bookmark-manager#readme",
   "dependencies": {
     "fuse.js": "^6.6.2",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "puppeteer": "^20.7.2"
   }
 }
