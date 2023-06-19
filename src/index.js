@@ -10,16 +10,15 @@ const autocompleteSearch = (query, list) => {
   query.addEventListener('input', () => {
     closeList();
     if (!query.value) return;
-    const suggestions = document.createElement('div');
+    const suggestions = document.createElement('ul');
     suggestions.setAttribute('id', 'suggestions');
     query.parentNode.appendChild(suggestions);
 
     list.forEach((item) => {
       if (item.url.toUpperCase().includes(query.value.toUpperCase())) {
-        const suggestion = document.createElement('ul');
         const listItem = document.createElement('li');
-        listItem.innerHTML = item.url;
-        suggestion.appendChild(listItem);
+        listItem.innerHTML = item.title;
+        suggestions.appendChild(listItem);
 
         listItem.addEventListener('click', () => {
           query.value = listItem.innerHTML;
@@ -27,7 +26,6 @@ const autocompleteSearch = (query, list) => {
           closeList();
         });
         listItem.style.cursor = 'pointer';
-        suggestions.appendChild(suggestion);
       }
     });
   });
