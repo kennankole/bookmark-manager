@@ -15,13 +15,13 @@ const autocompleteSearch = (query, list) => {
     query.parentNode.appendChild(suggestions);
 
     list.forEach((item) => {
-      if (item.url.toUpperCase().includes(query.value.toUpperCase())) {
+      if (item.title.toUpperCase().includes(query.value.toUpperCase())) {
         const listItem = document.createElement('li');
         listItem.innerHTML = item.title;
         suggestions.appendChild(listItem);
 
         listItem.addEventListener('click', () => {
-          query.value = listItem.innerHTML;
+          query.value = item.url;
           document.querySelector('#go').style.display = 'block';
           closeList();
         });
